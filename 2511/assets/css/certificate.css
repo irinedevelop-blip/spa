@@ -1,0 +1,2752 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@300;400;500;600&display=swap");
+
+:root {
+    --mscert-paper: #f7f3ed;
+    --mscert-ivory: #eee7de;
+    --mscert-dark: #241d18;
+    --mscert-wine: #4a2528;
+    --mscert-taupe: #77695d;
+    --mscert-gold: #bda984;
+    --mscert-white: #fffdf9;
+    --mscert-border: rgba(36, 29, 24, 0.18);
+    --mscert-ease: cubic-bezier(.22, 1, .36, 1);
+}
+
+
+/* ==================================================
+   ОСНОВНАЯ СТРАНИЦА
+================================================== */
+
+.mscert-page {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 105px 28px 140px;
+    color: var(--mscert-dark);
+    background:
+        radial-gradient(
+            circle at 8% 15%,
+            rgba(189, 169, 132, 0.14),
+            transparent 25%
+        ),
+        var(--mscert-paper);
+    font-family: "Manrope", sans-serif;
+}
+
+.mscert-page,
+.mscert-page * {
+    box-sizing: border-box;
+}
+
+.mscert-page::before {
+    content: "GIFT OF TIME";
+    position: absolute;
+    right: -30px;
+    bottom: 15px;
+    color: rgba(36, 29, 24, 0.028);
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(100px, 16vw, 240px);
+    font-weight: 400;
+    line-height: 0.65;
+    letter-spacing: -0.055em;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* Старые размытые круги не нужны */
+.mscert-bg-orb {
+    display: none;
+}
+
+.mscert-shell {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    width: min(1280px, 100%);
+    margin: 0 auto;
+    grid-template-columns: minmax(400px, 0.92fr) minmax(470px, 1.08fr);
+    align-items: start;
+    gap: clamp(65px, 8vw, 125px);
+}
+
+
+/* ==================================================
+   ПРЕДПРОСМОТР СЕРТИФИКАТА
+================================================== */
+
+.mscert-preview {
+    position: sticky;
+    top: 165px;
+    min-height: 570px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+}
+
+/* Задний лист */
+.mscert-preview::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 40px;
+    right: -17px;
+    bottom: 15px;
+    left: 26px;
+    border: 1px solid rgba(74, 37, 40, 0.18);
+    background: #ded3c7;
+    transform: rotate(3deg);
+}
+
+/* Основной сертификат */
+.mscert-preview__inner {
+    position: relative;
+    display: flex;
+    min-height: 520px;
+    height: 100%;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: center;
+    padding: 58px 55px;
+    border: 1px solid rgba(189, 169, 132, 0.42);
+    border-radius: 0;
+    color: var(--mscert-white);
+    background:
+        radial-gradient(
+            circle at 82% 12%,
+            rgba(189, 169, 132, 0.18),
+            transparent 32%
+        ),
+        linear-gradient(
+            145deg,
+            #543034 0%,
+            var(--mscert-wine) 45%,
+            #281c19 100%
+        );
+    box-shadow: 0 38px 80px rgba(36, 29, 24, 0.2);
+    transform: rotate(-2deg);
+    transition:
+        transform 0.6s var(--mscert-ease),
+        box-shadow 0.6s var(--mscert-ease);
+}
+
+.mscert-preview:hover .mscert-preview__inner {
+    transform: rotate(0deg) translateY(-5px);
+    box-shadow: 0 45px 90px rgba(36, 29, 24, 0.25);
+}
+
+/* Внутренняя рамка */
+.mscert-preview__inner::before {
+    content: "";
+    position: absolute;
+    inset: 15px;
+    border: 1px solid rgba(189, 169, 132, 0.42);
+    border-radius: 0;
+    pointer-events: none;
+}
+
+/* Декоративный круг */
+.mscert-preview__inner::after {
+    content: "";
+    position: absolute;
+    top: -145px;
+    right: -120px;
+    width: 360px;
+    height: 360px;
+    border: 1px solid rgba(189, 169, 132, 0.23);
+    border-radius: 50%;
+    box-shadow:
+        inset 0 0 0 34px rgba(189, 169, 132, 0.025),
+        inset 0 0 0 68px rgba(189, 169, 132, 0.025);
+    pointer-events: none;
+}
+
+.mscert-preview__label,
+.mscert-preview__brand,
+.mscert-preview__amount,
+.mscert-preview__recipient,
+.mscert-preview__message,
+.mscert-preview__line,
+.mscert-preview__number {
+    position: relative;
+    z-index: 2;
+}
+
+.mscert-preview__label {
+    margin-bottom: 30px;
+    color: var(--mscert-gold);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.27em;
+    text-transform: uppercase;
+}
+
+.mscert-preview__brand {
+    max-width: 450px;
+    color: var(--mscert-white);
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(58px, 6vw, 88px);
+    font-weight: 400;
+    line-height: 0.78;
+    letter-spacing: -0.045em;
+    text-transform: uppercase;
+}
+
+.mscert-preview__amount {
+    margin-top: 45px;
+    color: var(--mscert-gold);
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(42px, 5vw, 64px);
+    font-weight: 400;
+    line-height: 1;
+}
+
+.mscert-preview__recipient {
+    margin-top: 16px;
+    color: rgba(255, 253, 249, 0.8);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 21px;
+    font-style: italic;
+}
+
+.mscert-preview__message {
+    max-width: 390px;
+    margin-top: 22px;
+    color: rgba(255, 253, 249, 0.62);
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.75;
+}
+
+.mscert-preview__line {
+    width: 75px;
+    height: 1px;
+    margin-top: 32px;
+    background: var(--mscert-gold);
+}
+
+.mscert-preview__number {
+    margin-top: 18px;
+    color: rgba(255, 253, 249, 0.38);
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+
+/* ==================================================
+   ВАРИАНТЫ ДИЗАЙНА
+================================================== */
+
+/* Gold — бордовый фирменный */
+.mscert-preview[data-design="gold"] .mscert-preview__inner {
+    color: var(--mscert-white);
+    background:
+        radial-gradient(
+            circle at 82% 12%,
+            rgba(189, 169, 132, 0.18),
+            transparent 32%
+        ),
+        linear-gradient(
+            145deg,
+            #543034 0%,
+            var(--mscert-wine) 45%,
+            #281c19 100%
+        );
+}
+
+/* Dark — глубокий шоколадный */
+.mscert-preview[data-design="dark"] .mscert-preview__inner {
+    color: var(--mscert-white);
+    background:
+        radial-gradient(
+            circle at 82% 12%,
+            rgba(189, 169, 132, 0.12),
+            transparent 32%
+        ),
+        linear-gradient(
+            145deg,
+            #2b221d 0%,
+            #17110e 55%,
+            #080504 100%
+        );
+}
+
+/* Classic — светлый */
+.mscert-preview[data-design="classic"] .mscert-preview__inner {
+    color: var(--mscert-dark);
+    background:
+        radial-gradient(
+            circle at 82% 12%,
+            rgba(189, 169, 132, 0.18),
+            transparent 32%
+        ),
+        linear-gradient(
+            145deg,
+            #fffdf9,
+            #e8ded2
+        );
+}
+
+.mscert-preview[data-design="classic"] .mscert-preview__brand {
+    color: var(--mscert-dark);
+}
+
+.mscert-preview[data-design="classic"] .mscert-preview__recipient {
+    color: rgba(36, 29, 24, 0.75);
+}
+
+.mscert-preview[data-design="classic"] .mscert-preview__message {
+    color: rgba(36, 29, 24, 0.62);
+}
+
+.mscert-preview[data-design="classic"] .mscert-preview__number {
+    color: rgba(36, 29, 24, 0.4);
+}
+
+
+/* ==================================================
+   ФОРМА
+================================================== */
+
+.mscert-card {
+    position: relative;
+    padding: 20px 0 25px clamp(35px, 5vw, 75px);
+    border: 0;
+    border-left: 1px solid rgba(36, 29, 24, 0.16);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+}
+
+.mscert-kicker {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 25px;
+    color: var(--mscert-gold);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+}
+
+.mscert-kicker::before {
+    content: "";
+    width: 35px;
+    height: 1px;
+    flex: 0 0 auto;
+    background: currentColor;
+}
+
+.mscert-title {
+    max-width: 600px;
+    margin: 0;
+    color: var(--mscert-dark);
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(57px, 6vw, 88px);
+    font-weight: 400;
+    line-height: 0.87;
+    letter-spacing: -0.045em;
+}
+
+.mscert-subtitle {
+    max-width: 510px;
+    margin: 26px 0 48px;
+    color: var(--mscert-taupe);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.8;
+}
+
+
+/* ==================================================
+   ПОЛЯ
+================================================== */
+
+.mscert-form {
+    display: grid;
+    gap: 27px;
+}
+
+.mscert-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+}
+
+.mscert-field {
+    display: grid;
+    gap: 9px;
+    margin: 0;
+}
+
+.mscert-field > span {
+    color: var(--mscert-taupe);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.mscert-field input,
+.mscert-field textarea,
+.mscert-field select {
+    width: 100%;
+    min-height: 50px;
+    padding: 6px 0 10px;
+    border: 0;
+    border-bottom: 1px solid rgba(36, 29, 24, 0.24);
+    border-radius: 0;
+    outline: none;
+    color: var(--mscert-dark);
+    background: transparent;
+    box-shadow: none;
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    transition:
+        border-color 0.25s ease,
+        color 0.25s ease;
+}
+
+.mscert-field input::placeholder,
+.mscert-field textarea::placeholder {
+    color: rgba(119, 105, 93, 0.55);
+}
+
+.mscert-field textarea {
+    min-height: 105px;
+    padding-top: 13px;
+    resize: vertical;
+}
+
+.mscert-field select {
+    cursor: pointer;
+}
+
+.mscert-field input:focus,
+.mscert-field textarea:focus,
+.mscert-field select:focus {
+    border-color: var(--mscert-wine);
+    background: transparent;
+    box-shadow: none;
+}
+
+
+/* ==================================================
+   НОМИНАЛЫ
+================================================== */
+
+.mscert-amounts {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 7px;
+    margin: 4px 0 14px;
+}
+
+.mscert-amounts button {
+    min-width: 0;
+    min-height: 45px;
+    padding: 8px 7px;
+    border: 1px solid rgba(36, 29, 24, 0.2);
+    border-radius: 0;
+    color: var(--mscert-dark);
+    background: transparent;
+    font-family: "Manrope", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+        color 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.mscert-amounts button:hover {
+    color: var(--mscert-wine);
+    border-color: var(--mscert-wine);
+    background: transparent;
+}
+
+.mscert-amounts button.is-active {
+    color: var(--mscert-white);
+    border-color: var(--mscert-wine);
+    background: var(--mscert-wine);
+}
+
+
+/* ==================================================
+   ОСНОВНАЯ КНОПКА
+================================================== */
+
+.mscert-submit {
+    position: relative;
+    width: 100%;
+    min-height: 61px;
+    margin-top: 9px;
+    padding: 16px 70px 16px 25px;
+    overflow: hidden;
+    border: 1px solid var(--mscert-wine);
+    border-radius: 0;
+    color: var(--mscert-white);
+    background: var(--mscert-wine);
+    font-family: "Manrope", sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.17em;
+    text-align: left;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+        color 0.3s ease,
+        background 0.3s ease,
+        transform 0.3s ease;
+}
+
+.mscert-submit::after {
+    content: "→";
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    font-size: 20px;
+    font-weight: 300;
+    transform: translateY(-50%);
+    transition: right 0.3s ease;
+}
+
+.mscert-submit:hover {
+    color: var(--mscert-wine);
+    background: transparent;
+    transform: none;
+}
+
+.mscert-submit:hover::after {
+    right: 19px;
+}
+
+.mscert-small {
+    margin-top: -10px;
+    color: rgba(119, 105, 93, 0.75);
+    font-size: 10px;
+    font-weight: 300;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.mscert-notice {
+    padding: 18px 20px;
+    border: 1px solid rgba(189, 169, 132, 0.5);
+    color: var(--mscert-dark);
+    background: var(--mscert-ivory);
+}
+
+
+/* ==================================================
+   ПЛАНШЕТ
+================================================== */
+
+@media (max-width: 1024px) {
+    .mscert-page {
+        padding: 85px 24px 110px;
+    }
+
+    .mscert-shell {
+        grid-template-columns: minmax(340px, 0.9fr) minmax(420px, 1.1fr);
+        gap: 48px;
+    }
+
+    .mscert-preview {
+        top: 145px;
+    }
+
+    .mscert-preview__inner {
+        min-height: 480px;
+        padding: 45px 40px;
+    }
+
+    .mscert-card {
+        padding-left: 42px;
+    }
+
+    .mscert-amounts {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+/* ==================================================
+   МОБИЛЬНЫЙ
+================================================== */
+
+@media (max-width: 820px) {
+    .mscert-page {
+        padding: 65px 18px 90px;
+    }
+
+    .mscert-shell {
+        grid-template-columns: 1fr;
+        gap: 70px;
+    }
+
+    .mscert-preview {
+        position: relative;
+        top: auto;
+        width: min(570px, 100%);
+        min-height: 510px;
+        margin: 0 auto;
+    }
+
+    .mscert-card {
+        padding: 0;
+        border-left: 0;
+    }
+}
+
+@media (max-width: 640px) {
+    .mscert-page {
+        padding: 45px 15px 75px;
+    }
+
+    .mscert-shell {
+        gap: 55px;
+    }
+
+    .mscert-preview {
+        min-height: 430px;
+    }
+
+    .mscert-preview::before {
+        top: 25px;
+        right: -7px;
+        bottom: 5px;
+        left: 14px;
+    }
+
+    .mscert-preview__inner {
+        min-height: 405px;
+        padding: 39px 28px;
+        transform: rotate(-1.4deg);
+    }
+
+    .mscert-preview__inner::before {
+        inset: 10px;
+    }
+
+    .mscert-preview__brand {
+        font-size: 51px;
+    }
+
+    .mscert-preview__amount {
+        margin-top: 34px;
+        font-size: 43px;
+    }
+
+    .mscert-preview__recipient {
+        font-size: 18px;
+    }
+
+    .mscert-title {
+        font-size: 57px;
+    }
+
+    .mscert-subtitle {
+        margin-bottom: 38px;
+    }
+
+    .mscert-grid {
+        grid-template-columns: 1fr;
+        gap: 27px;
+    }
+
+    .mscert-amounts {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .mscert-submit {
+        padding-right: 55px;
+        font-size: 9px;
+    }
+}
+/* =========================================================
+   MEDI SIAM SPA — GIFT ATELIER CHECKOUT
+========================================================= */
+
+body.woocommerce-checkout {
+    --atelier-bg: #f7f1e7;
+    --atelier-paper: #fffaf0;
+    --atelier-ink: #190e08;
+    --atelier-brown: #3d2213;
+    --atelier-muted: #806d5f;
+    --atelier-gold: #c7a36b;
+    --atelier-wine: #50282c;
+    --atelier-line: rgba(61, 34, 19, .17);
+    --atelier-ease: cubic-bezier(.22, 1, .36, 1);
+
+    color: var(--atelier-ink);
+    background:
+        radial-gradient(
+            circle at 85% 12%,
+            rgba(199, 163, 107, .13),
+            transparent 25%
+        ),
+        var(--atelier-bg) !important;
+    font-family: "Manrope", sans-serif;
+}
+
+body.woocommerce-checkout *,
+body.woocommerce-checkout *::before,
+body.woocommerce-checkout *::after {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   СТРАНИЦА
+========================================================= */
+
+body.woocommerce-checkout
+.elementor-widget-html .woocommerce,
+body.woocommerce-checkout
+main > .woocommerce {
+    width: min(1380px, calc(100% - 72px)) !important;
+    max-width: 1380px !important;
+    margin: 0 auto !important;
+    padding: 72px 0 140px !important;
+}
+
+
+/* =========================================================
+   ИНФОРМАЦИЯ СВЕРХУ
+========================================================= */
+
+body.woocommerce-checkout
+.mscert-checkout-notice {
+    position: relative;
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr);
+    gap: 18px;
+    max-width: 780px;
+    margin: 0 0 80px !important;
+    padding: 20px 0 !important;
+    border: 0 !important;
+    border-top: 1px solid var(--atelier-gold) !important;
+    border-bottom: 1px solid var(--atelier-line) !important;
+    background: transparent !important;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-notice__icon {
+    color: var(--atelier-gold);
+    font-size: 10px;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-notice__title {
+    margin-bottom: 6px;
+    color: var(--atelier-brown);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-notice__text {
+    max-width: 680px;
+    color: var(--atelier-muted);
+    font-size: 10px;
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   EDITORIAL GRID
+========================================================= */
+
+body.woocommerce-checkout
+form.checkout.woocommerce-checkout {
+    position: relative;
+}
+
+body.woocommerce-checkout
+form.checkout.woocommerce-checkout::before {
+    content: "GIFT";
+    position: absolute;
+    z-index: 0;
+    top: -55px;
+    left: 34%;
+    color: rgba(61, 34, 19, .025);
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(170px, 24vw, 360px);
+    font-weight: 400;
+    line-height: .7;
+    letter-spacing: -.08em;
+    pointer-events: none;
+}
+
+@media (min-width: 961px) {
+    body.woocommerce-checkout
+    form.checkout.woocommerce-checkout {
+        display: grid !important;
+        grid-template-columns:
+            minmax(0, 1.15fr)
+            minmax(390px, .85fr) !important;
+        gap: 0 clamp(75px, 9vw, 135px) !important;
+        align-items: start !important;
+    }
+
+    body.woocommerce-checkout
+    #customer_details {
+        position: relative;
+        z-index: 2;
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+    }
+
+    body.woocommerce-checkout
+    #order_review {
+        position: sticky !important;
+        z-index: 3;
+        top: 150px !important;
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+    }
+}
+
+
+/* Родной заголовок заказа не нужен */
+
+body.woocommerce-checkout
+#order_review_heading {
+    display: none !important;
+}
+
+
+/* =========================================================
+   ЛЕВАЯ ЧАСТЬ — БЕЗ КАРТОЧКИ
+========================================================= */
+
+body.woocommerce-checkout
+#customer_details,
+body.woocommerce-checkout
+#customer_details .col-1,
+body.woocommerce-checkout
+#customer_details .col-2 {
+    display: block !important;
+    position: relative !important;
+    float: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+body.woocommerce-checkout
+#customer_details .col-2 {
+    margin-top: 70px !important;
+}
+
+
+/* =========================================================
+   ГЛАВНЫЙ ЗАГОЛОВОК
+========================================================= */
+
+body.woocommerce-checkout
+.woocommerce-billing-fields > h3 {
+    position: relative;
+    max-width: 680px;
+    margin: 0 0 75px !important;
+    padding: 34px 0 32px !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--atelier-line) !important;
+    color: var(--atelier-ink) !important;
+    font-family: "Cormorant Garamond", serif !important;
+    font-size: clamp(48px, 7vw, 65px) !important;
+    font-weight: 400 !important;
+    line-height: .76 !important;
+    letter-spacing: -.055em !important;
+    text-transform: none !important;
+}
+
+body.woocommerce-checkout
+.woocommerce-billing-fields > h3::before {
+    content: "01  /  СОЗДАНИЕ ПОДАРКА";
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--atelier-gold);
+    font-family: "Manrope", sans-serif;
+    font-size: 8px;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+}
+
+body.woocommerce-checkout
+.woocommerce-billing-fields > h3::after {
+    content: "Medi Siam SPA";
+    position: absolute;
+    right: 0;
+    bottom: 9px;
+    color: var(--atelier-muted);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 13px;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+
+/* =========================================================
+   ПОЛЯ
+========================================================= */
+
+body.woocommerce-checkout
+form.checkout .form-row {
+    margin: 0 0 34px !important;
+    padding: 0 !important;
+}
+
+body.woocommerce-checkout
+form.checkout .form-row-first,
+body.woocommerce-checkout
+form.checkout .form-row-last {
+    width: calc(50% - 20px) !important;
+}
+
+body.woocommerce-checkout
+form.checkout .form-row-first {
+    float: left !important;
+    clear: left !important;
+}
+
+body.woocommerce-checkout
+form.checkout .form-row-last {
+    float: right !important;
+    clear: right !important;
+}
+
+body.woocommerce-checkout
+form.checkout .form-row-wide {
+    clear: both !important;
+    width: 100% !important;
+}
+
+body.woocommerce-checkout
+form.checkout .form-row > label {
+    display: block !important;
+    margin: 0 0 10px !important;
+    color: var(--atelier-muted) !important;
+    font-family: "Manrope", sans-serif !important;
+    font-size: 8px !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+    letter-spacing: .19em !important;
+    text-transform: uppercase !important;
+}
+
+body.woocommerce-checkout
+form.checkout .form-row .required {
+    color: var(--atelier-gold) !important;
+    text-decoration: none !important;
+}
+
+body.woocommerce-checkout
+form.checkout input.input-text,
+body.woocommerce-checkout
+form.checkout textarea,
+body.woocommerce-checkout
+form.checkout select {
+    width: 100% !important;
+    min-height: 55px !important;
+    margin: 0 !important;
+    padding: 12px 0 !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--atelier-line) !important;
+    border-radius: 0 !important;
+    outline: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--atelier-ink) !important;
+    font-family: "Manrope", sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    transition:
+        border-color .35s ease,
+        padding-left .35s var(--atelier-ease) !important;
+}
+
+body.woocommerce-checkout
+form.checkout input.input-text:focus,
+body.woocommerce-checkout
+form.checkout textarea:focus,
+body.woocommerce-checkout
+form.checkout select:focus {
+    padding-left: 10px !important;
+    border-bottom-color: var(--atelier-gold) !important;
+}
+
+body.woocommerce-checkout
+form.checkout textarea {
+    min-height: 115px !important;
+    resize: vertical !important;
+}
+
+body.woocommerce-checkout
+form.checkout input::placeholder,
+body.woocommerce-checkout
+form.checkout textarea::placeholder {
+    color: rgba(128, 109, 95, .52) !important;
+}
+
+
+/* =========================================================
+   СПОСОБ ПОЛУЧЕНИЯ — АККУРАТНЫЕ EDITORIAL-СТРОКИ
+========================================================= */
+
+body.woocommerce-checkout
+.mscert-checkout-delivery-type {
+    clear: both !important;
+    width: 100% !important;
+    margin: 54px 0 38px !important;
+    padding: 34px 0 0 !important;
+    border-top: 0 !important;
+
+}
+
+body.woocommerce-checkout
+.mscert-checkout-delivery-type > label:first-child {
+    display: block !important;
+    margin: 0 0 24px !important;
+    color: var(--atelier-ink) !important;
+    font-family: "Cormorant Garamond", serif !important;
+    font-size: 32px !important;
+    font-weight: 500 !important;
+    line-height: 1.05 !important;
+    letter-spacing: -.025em !important;
+    text-transform: none !important;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-delivery-type .woocommerce-input-wrapper {
+    display: block !important;
+    width: 100% !important;
+    border: 0 !important;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-delivery-type .woocommerce-input-wrapper > br {
+    display: none !important;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-delivery-type input[type="radio"] {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: 0 !important;
+    opacity: 0 !important;
+    pointer-events: auto !important;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-delivery-type label.radio {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    min-height: 72px !important;
+    margin: 0 !important;
+    padding: 18px 58px 18px 52px !important;
+
+    border: 0 !important;
+    border-top: 1px solid var(--atelier-line) !important;
+    background: transparent !important;
+
+    color: var(--atelier-brown) !important;
+    font-family: "Manrope", sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 500 !important;
+    line-height: 1.5 !important;
+    letter-spacing: .055em !important;
+    text-transform: uppercase !important;
+
+    cursor: pointer !important;
+    transition:
+        color .35s ease,
+        background-color .35s ease,
+        padding-left .35s var(--atelier-ease) !important;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-delivery-type label.radio:last-child {
+    border-bottom: 1px solid var(--atelier-line) !important;
+}
+
+/* Номера 01 / 02 */
+
+body.woocommerce-checkout
+.mscert-checkout-delivery-type label.radio::before {
+    position: absolute !important;
+    top: 50% !important;
+    left: 4px !important;
+    width: 30px !important;
+    transform: translateY(-50%) !important;
+
+    color: var(--atelier-gold) !important;
+    font-family: "Cormorant Garamond", serif !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    line-height: 1 !important;
+    text-align: left !important;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-delivery-type
+input[value="email"] + label.radio::before {
+    content: "01" !important;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-delivery-type
+input[value="karaganda"] + label.radio::before {
+    content: "02" !important;
+}
+
+/* Круг со стрелкой строго справа */
+
+body.woocommerce-checkout
+.mscert-checkout-delivery-type label.radio::after {
+    content: "→" !important;
+    position: absolute !important;
+    top: 50% !important;
+    right: 4px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 28px !important;
+    height: 28px !important;
+    border: 1px solid rgba(61, 34, 19, .23) !important;
+    border-radius: 50% !important;
+
+    color: var(--atelier-brown) !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1 !important;
+
+    transform: translateY(-50%) !important;
+    transition:
+        color .3s ease,
+        border-color .3s ease,
+        background-color .3s ease,
+        transform .3s var(--atelier-ease) !important;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-delivery-type label.radio:hover {
+    padding-left: 58px !important;
+    color: var(--atelier-wine) !important;
+    background: rgba(199, 163, 107, .055) !important;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-delivery-type label.radio:hover::after {
+    border-color: var(--atelier-gold) !important;
+    color: var(--atelier-wine) !important;
+    transform: translateY(-50%) translateX(2px) !important;
+}
+
+/* Выбранный вариант */
+
+body.woocommerce-checkout
+.mscert-checkout-delivery-type
+input[type="radio"]:checked + label.radio,
+body.woocommerce-checkout
+.mscert-checkout-delivery-type
+label.radio.is-selected {
+    padding-left: 58px !important;
+    color: var(--atelier-wine) !important;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(199, 163, 107, .11),
+            rgba(199, 163, 107, 0) 74%
+        ) !important;
+    font-weight: 600 !important;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-delivery-type
+input[type="radio"]:checked + label.radio::after,
+body.woocommerce-checkout
+.mscert-checkout-delivery-type
+label.radio.is-selected::after {
+    content: "✓" !important;
+    border-color: var(--atelier-wine) !important;
+    background: var(--atelier-wine) !important;
+    color: var(--atelier-paper) !important;
+    font-size: 11px !important;
+    transform: translateY(-50%) !important;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-delivery-type
+input[type="radio"]:focus-visible + label.radio::after {
+    outline: 2px solid var(--atelier-gold) !important;
+    outline-offset: 3px !important;
+}
+
+
+/* =========================================================
+   АДРЕС
+========================================================= */
+
+body.woocommerce-checkout
+#billing_address_1_field {
+    margin-top: 45px !important;
+}
+
+body.woocommerce-checkout
+#billing_address_1_field,
+body.woocommerce-checkout
+#billing_address_2_field {
+    transition:
+        opacity .3s ease,
+        transform .3s ease;
+}
+
+body.woocommerce-checkout
+.mscert-address-hidden {
+    display: none !important;
+}
+
+
+/* =========================================================
+   ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ
+========================================================= */
+
+body.woocommerce-checkout
+.woocommerce-additional-fields {
+    clear: both !important;
+margin-top: 46px !important;
+padding: 32px 0 0 !important;
+    border-top: 1px solid var(--atelier-line);
+}
+
+body.woocommerce-checkout
+.woocommerce-additional-fields > h3 {
+    margin: 0 0 28px !important;
+    color: var(--atelier-ink) !important;
+    font-family: "Cormorant Garamond", serif !important;
+   font-size: 34px !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+    letter-spacing: -.03em !important;
+}
+
+
+/* =========================================================
+   ЧЕКБОКС
+========================================================= */
+
+body.woocommerce-checkout
+.woocommerce-form__label-for-checkbox {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 11px !important;
+    color: var(--atelier-muted) !important;
+    font-family: "Manrope", sans-serif !important;
+    font-size: 9px !important;
+    line-height: 1.65 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+}
+
+body.woocommerce-checkout
+input[type="checkbox"] {
+    accent-color: var(--atelier-wine);
+}
+
+
+/* =========================================================
+   ПРАВАЯ КОЛОНКА — БЕЗ ВНЕШНЕЙ КАРТОЧКИ
+========================================================= */
+
+body.woocommerce-checkout
+#order_review {
+    position: relative !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 32px 0 0 !important;
+
+    border: 0 !important;
+    border-top: 1px solid var(--atelier-gold) !important;
+
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--atelier-ink) !important;
+}
+
+body.woocommerce-checkout
+#order_review::before {
+    content: "ВАШ ПОДАРОК";
+    position: absolute;
+    top: -5px;
+    left: 0;
+    padding-right: 15px;
+    background: var(--atelier-bg);
+
+    color: var(--atelier-gold);
+    font-family: "Manrope", sans-serif;
+    font-size: 7px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: .22em;
+}
+
+
+
+/* =========================================================
+   ПАРЯЩИЙ СЕРТИФИКАТ
+========================================================= */
+
+body.woocommerce-checkout
+.mscert-checkout-preview-wrap {
+    margin: 0 0 45px;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-preview-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 0 0 20px;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-preview-kicker {
+    color: var(--atelier-gold);
+    font-size: 7px;
+    font-weight: 600;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-preview-head h3 {
+    margin: 6px 0 0 !important;
+    color: var(--atelier-ink) !important;
+    font-family: "Cormorant Garamond", serif !important;
+    font-size: 30px !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-preview-note {
+    max-width: 110px;
+    color: var(--atelier-muted);
+    font-size: 7px;
+    line-height: 1.5;
+    text-align: right;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-preview {
+    position: relative;
+    margin: 0 0 34px;
+    padding: 0;
+    filter: drop-shadow(0 28px 34px rgba(61, 34, 19, .15));
+    transform: rotate(-1.7deg);
+    transition: transform .6s var(--atelier-ease);
+}
+
+body.woocommerce-checkout
+.mscert-checkout-preview:hover {
+    transform: rotate(0deg) translateY(-5px);
+}
+
+body.woocommerce-checkout
+.mscert-checkout-preview__inner {
+    position: relative;
+    min-height: 275px;
+    overflow: hidden;
+    padding: 36px 33px;
+    color: var(--atelier-white);
+    background:
+        radial-gradient(
+            circle at 85% 5%,
+            rgba(199, 163, 107, .22),
+            transparent 36%
+        ),
+        var(--atelier-wine);
+    clip-path: polygon(
+        0 0,
+        calc(100% - 34px) 0,
+        100% 34px,
+        100% 100%,
+        0 100%
+    );
+}
+
+body.woocommerce-checkout
+.mscert-checkout-preview__inner::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(199, 163, 107, .35);
+    clip-path: polygon(
+        0 0,
+        calc(100% - 25px) 0,
+        100% 25px,
+        100% 100%,
+        0 100%
+    );
+    pointer-events: none;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-preview--dark
+.mscert-checkout-preview__inner {
+    background: #130b07;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-preview--classic
+.mscert-checkout-preview__inner {
+    color: var(--atelier-ink);
+    background: var(--atelier-paper);
+}
+
+body.woocommerce-checkout
+.mscert-checkout-preview__label,
+body.woocommerce-checkout
+.mscert-checkout-preview__subtitle,
+body.woocommerce-checkout
+.mscert-checkout-preview__number {
+    position: relative;
+    z-index: 2;
+    color: var(--atelier-gold);
+    font-size: 7px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-preview__brand {
+    position: relative;
+    z-index: 2;
+    margin: 23px 0 7px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 47px;
+    font-weight: 400;
+    line-height: .82;
+    letter-spacing: -.04em;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-preview__amount {
+    position: relative;
+    z-index: 2;
+    margin-top: 30px;
+    color: var(--atelier-gold);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 36px;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-preview__recipient {
+    position: relative;
+    z-index: 2;
+    margin-top: 8px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 17px;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-preview__sender,
+body.woocommerce-checkout
+.mscert-checkout-preview__message {
+    position: relative;
+    z-index: 2;
+    margin-top: 8px;
+    font-size: 8px;
+    line-height: 1.6;
+    opacity: .68;
+}
+
+body.woocommerce-checkout
+.mscert-checkout-preview__number {
+    margin-top: 22px;
+}
+
+
+/* =========================================================
+   СОСТАВ ЗАКАЗА — КАК РЕДАКЦИОННЫЙ СПИСОК
+========================================================= */
+
+body.woocommerce-checkout
+#order_review table {
+    width: 100% !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-collapse: collapse !important;
+    background: transparent !important;
+}
+
+body.woocommerce-checkout
+#order_review table th,
+body.woocommerce-checkout
+#order_review table td {
+    padding: 18px 0 !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--atelier-line) !important;
+    background: transparent !important;
+    color: var(--atelier-ink) !important;
+    font-family: "Manrope", sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 400 !important;
+    line-height: 1.6 !important;
+    vertical-align: top !important;
+}
+
+body.woocommerce-checkout
+#order_review table thead th {
+    color: var(--atelier-gold) !important;
+    font-size: 7px !important;
+    font-weight: 600 !important;
+    letter-spacing: .2em !important;
+    text-transform: uppercase !important;
+}
+
+body.woocommerce-checkout
+#order_review .product-name {
+    width: 65% !important;
+    padding-right: 20px !important;
+}
+
+body.woocommerce-checkout
+#order_review .product-total {
+    width: 35% !important;
+    text-align: right !important;
+    white-space: nowrap !important;
+}
+
+body.woocommerce-checkout
+#order_review .order-total th,
+body.woocommerce-checkout
+#order_review .order-total td {
+    padding-top: 28px !important;
+    border-bottom: 0 !important;
+    color: var(--atelier-ink) !important;
+    font-family: "Cormorant Garamond", serif !important;
+    font-size: 29px !important;
+    font-weight: 400 !important;
+    letter-spacing: -.02em !important;
+    text-transform: none !important;
+}
+
+body.woocommerce-checkout
+#order_review .order-total td {
+    text-align: right !important;
+    white-space: nowrap !important;
+}
+
+
+/* =========================================================
+   ОПЛАТА
+========================================================= */
+
+body.woocommerce-checkout
+#payment {
+    margin: 28px 0 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+}
+
+body.woocommerce-checkout
+#payment ul.payment_methods {
+    margin: 0 !important;
+    padding: 20px 0 !important;
+    border-top: 1px solid var(--atelier-line) !important;
+    border-bottom: 1px solid var(--atelier-line) !important;
+}
+
+body.woocommerce-checkout
+#payment div.payment_box {
+    margin: 15px 0 !important;
+    padding: 15px 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: var(--atelier-muted) !important;
+    font-size: 9px !important;
+    line-height: 1.65 !important;
+}
+
+body.woocommerce-checkout
+#payment div.payment_box::before {
+    display: none !important;
+}
+
+body.woocommerce-checkout
+#payment .woocommerce-privacy-policy-text {
+    color: var(--atelier-muted) !important;
+    font-size: 8px !important;
+    line-height: 1.65 !important;
+}
+
+body.woocommerce-checkout
+#payment .woocommerce-privacy-policy-text a {
+    color: var(--atelier-wine) !important;
+}
+
+
+/* =========================================================
+   КНОПКА — ТЕКСТОВАЯ СТРЕЛКА
+========================================================= */
+
+body.woocommerce-checkout
+#place_order {
+    position: relative !important;
+    float: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    width: 100% !important;
+    min-height: 62px !important;
+    margin: 28px 0 0 !important;
+    padding: 17px 22px !important;
+
+    border: 1px solid var(--atelier-brown) !important;
+    border-radius: 0 !important;
+    background: var(--atelier-brown) !important;
+
+    color: var(--atelier-paper) !important;
+    font-family: "Manrope", sans-serif !important;
+    font-size: 9px !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+    letter-spacing: .18em !important;
+    text-align: left !important;
+    text-transform: uppercase !important;
+
+    cursor: pointer !important;
+    transition:
+        color .35s ease,
+        background-color .35s ease,
+        border-color .35s ease !important;
+}
+
+body.woocommerce-checkout
+#place_order::after {
+    content: "↗";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 27px;
+    height: 27px;
+    margin-left: 18px;
+
+    border: 1px solid rgba(255, 250, 240, .35);
+    border-radius: 50%;
+
+    color: var(--atelier-gold);
+    font-size: 14px;
+    line-height: 1;
+    transition:
+        color .3s ease,
+        border-color .3s ease,
+        transform .3s var(--atelier-ease);
+}
+
+body.woocommerce-checkout
+#place_order:hover {
+    padding-left: 22px !important;
+    border-color: var(--atelier-wine) !important;
+    background: var(--atelier-wine) !important;
+    color: var(--atelier-paper) !important;
+}
+
+body.woocommerce-checkout
+#place_order:hover::after {
+    border-color: var(--atelier-gold);
+    color: var(--atelier-paper);
+    transform: rotate(45deg);
+}
+
+
+/* =========================================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+========================================================= */
+
+@media (max-width: 960px) {
+    body.woocommerce-checkout
+    .elementor-widget-html .woocommerce,
+    body.woocommerce-checkout
+    main > .woocommerce {
+        width: min(720px, calc(100% - 36px)) !important;
+        padding: 55px 0 95px !important;
+    }
+
+    body.woocommerce-checkout
+    form.checkout.woocommerce-checkout {
+        display: block !important;
+    }
+
+    body.woocommerce-checkout
+    form.checkout.woocommerce-checkout::before {
+        display: none;
+    }
+
+    body.woocommerce-checkout
+    #customer_details {
+        margin-bottom: 80px !important;
+    }
+
+    body.woocommerce-checkout
+    #order_review {
+        position: relative !important;
+        top: auto !important;
+        padding-left: 28px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    body.woocommerce-checkout
+    .elementor-widget-html .woocommerce,
+    body.woocommerce-checkout
+    main > .woocommerce {
+        width: calc(100% - 28px) !important;
+        padding: 42px 0 75px !important;
+    }
+
+    body.woocommerce-checkout
+    .woocommerce-billing-fields > h3 {
+        font-size: 62px !important;
+    }
+
+    body.woocommerce-checkout
+    form.checkout .form-row-first,
+    body.woocommerce-checkout
+    form.checkout .form-row-last {
+        float: none !important;
+        clear: both !important;
+        width: 100% !important;
+    }
+
+    body.woocommerce-checkout
+    .mscert-checkout-delivery-type
+    > label:first-child {
+        font-size: 32px !important;
+    }
+
+    body.woocommerce-checkout
+    .mscert-checkout-delivery-type
+    label.radio {
+        grid-template-columns: 42px minmax(0, 1fr) 20px;
+    }
+
+    body.woocommerce-checkout
+    #order_review {
+        padding-left: 18px !important;
+    }
+
+    body.woocommerce-checkout
+    .mscert-checkout-preview__inner {
+        min-height: 245px;
+        padding: 31px 26px;
+    }
+}
+/* =========================================================
+   MEDI SIAM SPA — CLASSIC CART
+========================================================= */
+
+body.page-id-14 {
+    --cart-bg: #f7f1e7;
+    --cart-paper: #fffaf0;
+    --cart-ink: #190e08;
+    --cart-brown: #3d2213;
+    --cart-muted: #806d5f;
+    --cart-gold: #c7a36b;
+    --cart-wine: #50282c;
+    --cart-line: rgba(61, 34, 19, .16);
+    --cart-gold-line: rgba(199, 163, 107, .48);
+    --cart-ease: cubic-bezier(.22, 1, .36, 1);
+
+    color: var(--cart-ink);
+    background:
+        radial-gradient(
+            circle at 7% 8%,
+            rgba(199, 163, 107, .13),
+            transparent 23%
+        ),
+        var(--cart-bg) !important;
+
+    font-family: "Manrope", Arial, sans-serif;
+}
+
+body.page-id-14 *,
+body.page-id-14 *::before,
+body.page-id-14 *::after {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   ОБЩАЯ КОМПОЗИЦИЯ
+========================================================= */
+
+body.page-id-14 main > .woocommerce,
+body.page-id-14 .site-main > .woocommerce,
+body.page-id-14 .entry-content > .woocommerce,
+body.page-id-14 .elementor-widget-shortcode .woocommerce {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 390px !important;
+    column-gap: clamp(55px, 6vw, 90px) !important;
+    align-items: start !important;
+
+    width: min(1280px, calc(100% - 72px)) !important;
+    max-width: 1280px !important;
+    margin: 0 auto !important;
+    padding: 92px 0 130px !important;
+}
+
+
+/* Уведомления занимают всю ширину */
+
+body.page-id-14
+.woocommerce > .woocommerce-message,
+body.page-id-14
+.woocommerce > .woocommerce-info,
+body.page-id-14
+.woocommerce > .woocommerce-error {
+    grid-column: 1 / -1 !important;
+}
+
+
+/* Левая колонка */
+
+body.page-id-14
+.woocommerce-cart-form {
+    position: relative !important;
+    grid-column: 1 !important;
+
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 145px 0 0 !important;
+}
+
+
+/* Правая колонка */
+
+body.page-id-14
+.cart-collaterals {
+    grid-column: 2 !important;
+
+    width: 100% !important;
+    margin: 145px 0 0 !important;
+    padding: 31px 0 0 36px !important;
+
+    border-left: 1px solid var(--cart-gold) !important;
+}
+
+
+/* =========================================================
+   ЗАГОЛОВОК
+========================================================= */
+
+body.page-id-14
+.woocommerce-cart-form::before {
+    content: "Ваш выбор";
+    position: absolute;
+    top: 13px;
+    left: 0;
+
+    color: var(--cart-ink);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(72px, 7vw, 108px);
+    font-weight: 400;
+    line-height: .82;
+    letter-spacing: -.065em;
+    white-space: nowrap;
+}
+
+body.page-id-14
+.woocommerce-cart-form::after {
+    content: "ПРОГРАММЫ И ПОДАРКИ · MEDI SIAM SPA";
+    position: absolute;
+    top: 108px;
+    left: 4px;
+
+    color: var(--cart-gold);
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 7px;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: .23em;
+}
+
+
+/* =========================================================
+   УВЕДОМЛЕНИЯ
+========================================================= */
+
+body.page-id-14
+.woocommerce-message,
+body.page-id-14
+.woocommerce-info,
+body.page-id-14
+.woocommerce-error {
+    margin: 0 0 28px !important;
+    padding: 17px 22px !important;
+
+    border: 0 !important;
+    border-top: 1px solid var(--cart-gold) !important;
+    border-bottom: 1px solid var(--cart-line) !important;
+    border-radius: 0 !important;
+
+    background: transparent !important;
+    color: var(--cart-muted) !important;
+
+    font-family: "Manrope", Arial, sans-serif !important;
+    font-size: 10px !important;
+    line-height: 1.6 !important;
+}
+
+body.page-id-14
+.woocommerce-message::before,
+body.page-id-14
+.woocommerce-info::before {
+    display: none !important;
+}
+
+body.page-id-14
+.woocommerce-message .button {
+    color: var(--cart-wine) !important;
+    background: transparent !important;
+}
+
+
+/* =========================================================
+   ТАБЛИЦА
+========================================================= */
+
+body.page-id-14
+table.shop_table.cart {
+    width: 100% !important;
+    margin: 0 !important;
+
+    border: 0 !important;
+    border-top: 1px solid var(--cart-gold-line) !important;
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+    border-radius: 0 !important;
+    table-layout: auto !important;
+
+    background: transparent !important;
+}
+
+body.page-id-14
+table.shop_table.cart thead th {
+    padding: 14px 9px !important;
+
+    border: 0 !important;
+    border-bottom: 1px solid var(--cart-line) !important;
+
+    background: transparent !important;
+    color: var(--cart-gold) !important;
+
+    font-family: "Manrope", Arial, sans-serif !important;
+    font-size: 7px !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+    letter-spacing: .2em !important;
+    text-transform: uppercase !important;
+}
+
+body.page-id-14
+table.shop_table.cart thead th:first-child {
+    padding-left: 0 !important;
+}
+
+body.page-id-14
+table.shop_table.cart thead th:last-child {
+    padding-right: 0 !important;
+    text-align: right !important;
+}
+
+body.page-id-14
+table.shop_table.cart tr.cart_item {
+    transition: background-color .35s ease;
+}
+
+body.page-id-14
+table.shop_table.cart tr.cart_item:hover {
+    background: rgba(199, 163, 107, .045) !important;
+}
+
+body.page-id-14
+table.shop_table.cart tr.cart_item td {
+    padding: 26px 9px !important;
+
+    border: 0 !important;
+    border-bottom: 1px solid var(--cart-line) !important;
+
+    background: transparent !important;
+    color: var(--cart-ink) !important;
+    vertical-align: middle !important;
+}
+
+
+/* =========================================================
+   УДАЛЕНИЕ
+========================================================= */
+
+body.page-id-14
+table.shop_table.cart td.product-remove {
+    width: 42px !important;
+    padding-left: 0 !important;
+}
+
+body.page-id-14
+table.shop_table.cart td.product-remove a.remove {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 29px !important;
+    height: 29px !important;
+
+    border: 1px solid var(--cart-line) !important;
+    border-radius: 50% !important;
+
+    background: transparent !important;
+    color: var(--cart-muted) !important;
+
+    font-family: Arial, sans-serif !important;
+    font-size: 17px !important;
+    font-weight: 300 !important;
+    line-height: 1 !important;
+
+    transition:
+        color .3s ease,
+        background-color .3s ease,
+        border-color .3s ease,
+        transform .4s var(--cart-ease) !important;
+}
+
+body.page-id-14
+table.shop_table.cart td.product-remove a.remove:hover {
+    border-color: var(--cart-wine) !important;
+    background: var(--cart-wine) !important;
+    color: var(--cart-paper) !important;
+    transform: rotate(90deg);
+}
+
+
+
+
+ /* =========================================================
+   КОЛОНКА ИЗОБРАЖЕНИЯ НЕ ИСПОЛЬЗУЕТСЯ
+========================================================= */
+
+body.page-id-14
+table.shop_table.cart th.product-thumbnail,
+body.page-id-14
+table.shop_table.cart td.product-thumbnail {
+    display: none !important;
+}
+/* =========================================================
+   НАЗВАНИЕ ТОВАРА
+========================================================= */
+
+body.page-id-14
+table.shop_table.cart td.product-name {
+    width: 55% !important;
+    min-width: 280px !important;
+    padding-left: 14px !important;
+    padding-right: 30px !important;
+}
+
+body.page-id-14
+table.shop_table.cart td.product-name > a {
+    display: inline-block !important;
+    max-width: 540px !important;
+
+    color: var(--cart-ink) !important;
+    font-family: "Cormorant Garamond", Georgia, serif !important;
+    font-size: clamp(20px, 1.8vw, 27px) !important;
+    font-weight: 500 !important;
+    line-height: 1.06 !important;
+    letter-spacing: -.022em !important;
+    text-decoration: none !important;
+
+    transition:
+        color .3s ease,
+        transform .4s var(--cart-ease) !important;
+}
+
+body.page-id-14
+table.shop_table.cart td.product-name > a:hover {
+    color: var(--cart-wine) !important;
+    transform: translateX(4px);
+}
+
+body.page-id-14
+table.shop_table.cart td.product-name p,
+body.page-id-14
+table.shop_table.cart td.product-name dl,
+body.page-id-14
+table.shop_table.cart td.product-name .variation {
+    margin: 8px 0 0 !important;
+
+    color: var(--cart-muted) !important;
+    font-family: "Manrope", Arial, sans-serif !important;
+    font-size: 8px !important;
+    font-weight: 400 !important;
+    line-height: 1.6 !important;
+}
+
+body.page-id-14
+table.shop_table.cart td.product-name .variation dt,
+body.page-id-14
+table.shop_table.cart td.product-name .variation dd {
+    display: inline !important;
+    float: none !important;
+    margin: 0 5px 0 0 !important;
+}
+
+
+/* =========================================================
+   ЦЕНЫ
+========================================================= */
+
+body.page-id-14
+table.shop_table.cart td.product-price {
+    width: 110px !important;
+    white-space: nowrap !important;
+
+    color: var(--cart-muted) !important;
+    font-family: "Manrope", Arial, sans-serif !important;
+    font-size: 9px !important;
+}
+
+body.page-id-14
+table.shop_table.cart td.product-subtotal {
+    width: 125px !important;
+    padding-right: 0 !important;
+    white-space: nowrap !important;
+
+    color: var(--cart-ink) !important;
+    font-family: "Cormorant Garamond", Georgia, serif !important;
+    font-size: 21px !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+    text-align: right !important;
+}
+
+
+/* =========================================================
+   КОЛИЧЕСТВО
+========================================================= */
+
+body.page-id-14
+table.shop_table.cart td.product-quantity {
+    width: 90px !important;
+}
+
+body.page-id-14
+table.shop_table.cart .quantity {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    min-width: 66px !important;
+    min-height: 38px !important;
+    padding: 0 9px !important;
+
+    border: 1px solid var(--cart-gold-line) !important;
+    border-radius: 30px !important;
+
+    background: rgba(255, 250, 240, .34) !important;
+}
+
+body.page-id-14
+table.shop_table.cart .quantity .qty {
+    width: 46px !important;
+    min-width: 46px !important;
+    height: 36px !important;
+    padding: 0 !important;
+
+    border: 0 !important;
+    outline: 0 !important;
+
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--cart-ink) !important;
+
+    font-family: "Manrope", Arial, sans-serif !important;
+    font-size: 10px !important;
+    text-align: center !important;
+}
+
+
+/* =========================================================
+   КУПОН И ОБНОВЛЕНИЕ
+========================================================= */
+
+body.page-id-14
+table.shop_table.cart td.actions {
+    padding: 27px 0 0 !important;
+    border: 0 !important;
+}
+
+body.page-id-14
+table.shop_table.cart td.actions .coupon {
+    display: flex !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+}
+
+body.page-id-14
+table.shop_table.cart td.actions .coupon label {
+    display: none !important;
+}
+
+body.page-id-14
+table.shop_table.cart td.actions
+input.input-text {
+    width: 185px !important;
+    min-height: 46px !important;
+    margin: 0 !important;
+    padding: 0 14px !important;
+
+    border: 1px solid var(--cart-line) !important;
+    border-right: 0 !important;
+    border-radius: 0 !important;
+    outline: 0 !important;
+
+    background: transparent !important;
+    color: var(--cart-ink) !important;
+
+    font-family: "Manrope", Arial, sans-serif !important;
+    font-size: 9px !important;
+}
+
+body.page-id-14
+table.shop_table.cart td.actions button,
+body.page-id-14
+table.shop_table.cart td.actions .button {
+    min-height: 46px !important;
+    padding: 0 17px !important;
+
+    border: 1px solid var(--cart-brown) !important;
+    border-radius: 0 !important;
+
+    background: transparent !important;
+    color: var(--cart-brown) !important;
+
+    font-family: "Manrope", Arial, sans-serif !important;
+    font-size: 7px !important;
+    font-weight: 600 !important;
+    letter-spacing: .14em !important;
+    text-transform: uppercase !important;
+
+    transition:
+        color .3s ease,
+        background-color .3s ease !important;
+}
+
+body.page-id-14
+table.shop_table.cart td.actions button:hover,
+body.page-id-14
+table.shop_table.cart td.actions .button:hover {
+    background: var(--cart-brown) !important;
+    color: var(--cart-paper) !important;
+}
+
+body.page-id-14
+table.shop_table.cart td.actions
+button[name="update_cart"] {
+    float: right !important;
+}
+
+body.page-id-14
+table.shop_table.cart td.actions
+button:disabled {
+    opacity: .35 !important;
+}
+
+
+/* =========================================================
+   СУММА КОРЗИНЫ
+========================================================= */
+
+body.page-id-14
+.cart-collaterals .cart_totals {
+    float: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+body.page-id-14
+.cart-collaterals .cart_totals > h2 {
+    margin: 0 0 27px !important;
+
+    color: var(--cart-ink) !important;
+    font-family: "Cormorant Garamond", Georgia, serif !important;
+    font-size: 48px !important;
+    font-weight: 400 !important;
+    line-height: .88 !important;
+    letter-spacing: -.045em !important;
+    text-transform: none !important;
+}
+
+body.page-id-14
+.cart-collaterals .cart_totals > h2::before {
+    content: "ВАШ ЗАКАЗ";
+    display: block;
+    margin: 0 0 13px;
+
+    color: var(--cart-gold);
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 7px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: .23em;
+}
+
+body.page-id-14
+.cart_totals table.shop_table {
+    width: 100% !important;
+    margin: 0 !important;
+
+    border: 0 !important;
+    border-top: 1px solid var(--cart-line) !important;
+    border-collapse: collapse !important;
+    border-radius: 0 !important;
+
+    background: transparent !important;
+}
+
+body.page-id-14
+.cart_totals table.shop_table th,
+body.page-id-14
+.cart_totals table.shop_table td {
+    padding: 18px 0 !important;
+
+    border: 0 !important;
+    border-bottom: 1px solid var(--cart-line) !important;
+
+    background: transparent !important;
+    color: var(--cart-muted) !important;
+
+    font-family: "Manrope", Arial, sans-serif !important;
+    font-size: 9px !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+}
+
+body.page-id-14
+.cart_totals table.shop_table th {
+    width: 45% !important;
+    letter-spacing: .08em !important;
+    text-transform: uppercase !important;
+}
+
+body.page-id-14
+.cart_totals table.shop_table td {
+    text-align: right !important;
+}
+
+body.page-id-14
+.cart_totals table.shop_table
+tr.order-total th,
+body.page-id-14
+.cart_totals table.shop_table
+tr.order-total td {
+    padding-top: 25px !important;
+    padding-bottom: 24px !important;
+
+    border-bottom-color: var(--cart-gold-line) !important;
+
+    color: var(--cart-ink) !important;
+    font-family: "Cormorant Garamond", Georgia, serif !important;
+    font-size: 27px !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+    letter-spacing: -.02em !important;
+    text-transform: none !important;
+}
+
+
+/* =========================================================
+   КНОПКА ОФОРМЛЕНИЯ
+========================================================= */
+
+body.page-id-14
+.wc-proceed-to-checkout {
+    margin: 0 !important;
+    padding: 25px 0 0 !important;
+}
+
+body.page-id-14
+.wc-proceed-to-checkout
+a.checkout-button {
+    position: relative !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    width: 100% !important;
+    min-height: 62px !important;
+    margin: 0 !important;
+    padding: 17px 60px 17px 20px !important;
+
+    border: 1px solid var(--cart-brown) !important;
+    border-radius: 0 !important;
+
+    background: var(--cart-brown) !important;
+    color: var(--cart-paper) !important;
+
+    font-family: "Manrope", Arial, sans-serif !important;
+    font-size: 8px !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+    letter-spacing: .17em !important;
+    text-align: left !important;
+    text-transform: uppercase !important;
+
+    transition:
+        background-color .35s ease,
+        border-color .35s ease !important;
+}
+
+body.page-id-14
+.wc-proceed-to-checkout
+a.checkout-button::after {
+    content: "↗";
+    position: absolute;
+    top: 50%;
+    right: 19px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+
+    border: 1px solid rgba(255, 250, 240, .32);
+    border-radius: 50%;
+
+    color: var(--cart-gold);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1;
+
+    transform: translateY(-50%);
+    transition:
+        transform .4s var(--cart-ease),
+        border-color .3s ease;
+}
+
+body.page-id-14
+.wc-proceed-to-checkout
+a.checkout-button:hover {
+    border-color: var(--cart-wine) !important;
+    background: var(--cart-wine) !important;
+}
+
+body.page-id-14
+.wc-proceed-to-checkout
+a.checkout-button:hover::after {
+    border-color: var(--cart-gold);
+    transform: translateY(-50%) rotate(45deg);
+}
+
+
+/* =========================================================
+   ПУСТАЯ КОРЗИНА
+========================================================= */
+
+body.page-id-14
+p.cart-empty.woocommerce-info {
+    grid-column: 1 / -1 !important;
+    max-width: 760px !important;
+    margin: 50px auto 25px !important;
+    padding: 130px 20px 0 !important;
+
+    border: 0 !important;
+
+    color: var(--cart-ink) !important;
+    font-family: "Cormorant Garamond", Georgia, serif !important;
+    font-size: clamp(45px, 6vw, 74px) !important;
+    font-weight: 400 !important;
+    line-height: .92 !important;
+    letter-spacing: -.045em !important;
+    text-align: center !important;
+}
+
+body.page-id-14
+p.cart-empty.woocommerce-info::before {
+    content: "✦" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 50% !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 100px !important;
+    height: 100px !important;
+
+    border: 1px solid var(--cart-gold-line);
+    border-radius: 50%;
+
+    color: var(--cart-gold) !important;
+    font-size: 17px !important;
+
+    transform: translateX(-50%);
+}
+
+body.page-id-14
+p.return-to-shop {
+    grid-column: 1 / -1 !important;
+    margin: 0 !important;
+    text-align: center !important;
+}
+
+body.page-id-14
+p.return-to-shop .button {
+    min-height: 50px !important;
+    padding: 0 24px !important;
+
+    border: 1px solid var(--cart-brown) !important;
+    border-radius: 0 !important;
+
+    background: transparent !important;
+    color: var(--cart-brown) !important;
+
+    font-family: "Manrope", Arial, sans-serif !important;
+    font-size: 8px !important;
+    font-weight: 600 !important;
+    letter-spacing: .16em !important;
+    text-transform: uppercase !important;
+}
+
+body.page-id-14
+p.return-to-shop .button:hover {
+    background: var(--cart-brown) !important;
+    color: var(--cart-paper) !important;
+}
+
+
+/* =========================================================
+   ПЛАНШЕТ
+========================================================= */
+
+@media (max-width: 1050px) {
+    body.page-id-14
+    main > .woocommerce,
+    body.page-id-14
+    .site-main > .woocommerce,
+    body.page-id-14
+    .entry-content > .woocommerce,
+    body.page-id-14
+    .elementor-widget-shortcode .woocommerce {
+        grid-template-columns: minmax(0, 1fr) 330px !important;
+        column-gap: 38px !important;
+
+        width: min(940px, calc(100% - 40px)) !important;
+    }
+
+    body.page-id-14
+    table.shop_table.cart td.product-thumbnail {
+        display: none !important;
+    }
+
+    body.page-id-14
+    table.shop_table.cart th.product-thumbnail {
+        display: none !important;
+    }
+
+    body.page-id-14
+    table.shop_table.cart td.product-name {
+        min-width: 180px !important;
+    }
+}
+
+
+/* =========================================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+========================================================= */
+
+@media (max-width: 800px) {
+    body.page-id-14
+    main > .woocommerce,
+    body.page-id-14
+    .site-main > .woocommerce,
+    body.page-id-14
+    .entry-content > .woocommerce,
+    body.page-id-14
+    .elementor-widget-shortcode .woocommerce {
+        display: block !important;
+
+        width: calc(100% - 28px) !important;
+        padding: 45px 0 80px !important;
+    }
+
+    body.page-id-14
+    .woocommerce-cart-form {
+        padding-top: 118px !important;
+    }
+
+    body.page-id-14
+    .woocommerce-cart-form::before {
+        top: 12px;
+        font-size: 62px;
+        white-space: normal;
+    }
+
+    body.page-id-14
+    .woocommerce-cart-form::after {
+        top: 84px;
+        max-width: 280px;
+    }
+
+    body.page-id-14
+    table.shop_table.cart {
+        display: block !important;
+        border-top: 1px solid var(--cart-gold-line) !important;
+    }
+
+    body.page-id-14
+    table.shop_table.cart thead {
+        display: none !important;
+    }
+
+    body.page-id-14
+    table.shop_table.cart tbody,
+    body.page-id-14
+    table.shop_table.cart tr,
+    body.page-id-14
+    table.shop_table.cart td {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    body.page-id-14
+    table.shop_table.cart tr.cart_item {
+        position: relative;
+        padding: 25px 42px 24px 0 !important;
+        border-bottom: 1px solid var(--cart-line) !important;
+    }
+
+    body.page-id-14
+    table.shop_table.cart tr.cart_item td {
+        min-height: 0 !important;
+        padding: 6px 0 !important;
+        border: 0 !important;
+        text-align: left !important;
+    }
+
+    body.page-id-14
+    table.shop_table.cart tr.cart_item td::before {
+        display: none !important;
+    }
+
+    body.page-id-14
+    table.shop_table.cart td.product-remove {
+        position: absolute;
+        top: 24px;
+        right: 0;
+
+        width: 29px !important;
+        padding: 0 !important;
+    }
+
+    body.page-id-14
+    table.shop_table.cart td.product-thumbnail {
+        display: none !important;
+    }
+
+    body.page-id-14
+    table.shop_table.cart td.product-name {
+        min-width: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    body.page-id-14
+    table.shop_table.cart td.product-name > a {
+        padding-right: 10px;
+        font-size: 25px !important;
+    }
+
+    body.page-id-14
+    table.shop_table.cart td.product-price {
+        display: none !important;
+    }
+
+    body.page-id-14
+    table.shop_table.cart td.product-subtotal {
+        margin-top: 7px;
+        font-size: 22px !important;
+        text-align: left !important;
+    }
+
+    body.page-id-14
+    table.shop_table.cart td.actions {
+        padding-top: 25px !important;
+    }
+
+    body.page-id-14
+    table.shop_table.cart td.actions .coupon {
+        width: 100% !important;
+    }
+
+    body.page-id-14
+    table.shop_table.cart td.actions
+    input.input-text {
+        flex: 1 !important;
+        width: auto !important;
+        min-width: 0 !important;
+    }
+
+    body.page-id-14
+    table.shop_table.cart td.actions
+    button[name="update_cart"] {
+        float: none !important;
+        width: 100% !important;
+        margin-top: 11px !important;
+    }
+
+    body.page-id-14
+    .cart-collaterals {
+        width: 100% !important;
+        margin: 65px 0 0 !important;
+        padding: 28px 0 0 22px !important;
+    }
+
+    body.page-id-14
+    .cart-collaterals .cart_totals > h2 {
+        font-size: 45px !important;
+    }
+}
